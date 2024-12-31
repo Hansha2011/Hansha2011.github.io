@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head><title>HSS - NanoHanziChecker</title><meta charset="utf-8">
+	<!--Make by HSS - NANOFONT-->
+<script>
+	var time;
+	var popup;
+	var q;
+	function pop(ch)
+	{
+		time = 0;
+		var btnValue = document.getElementsByClassName("set-v2-popup-symbol")[0];
+		btnValue.innerHTML = ch;
+		popup = document.getElementsByClassName("set-v2-popup")[0];
+		clearInterval(q);
+		q = setInterval(function(){opa()},50);	
+	}
+	function opa()
+	{
+		var op;
+		if (time < 0.5)
+			{
+				op= - 4 * time * time + 4 * time;
+			}
+		else if (time >1)
+			{
+				op = - 4 * time * time + 8 * time - 3;
+			}
+		else
+			{
+				op = 1;
+			}
+		popup.style = "display: block;opacity: " + op + ";";
+		if (op < 0)
+			{
+				op = 0;
+				time = -0.05;
+				popup.style = "display: none;";
+				clearInterval(q);
+			}
+		time += 0.05;
+	}
+	fuction 
+</script>
+<link rel="icon" type="image/x-icon" href="./icon/main.ico" />
+</head>
+<body>
+
+<link rel="stylesheet" type="text/css" href="style.css"/>
+
+
+<div id="main">
+
+<!-- UI 画面区 -->
+<div id="sk_header">
+	<div id="sk_logo">
+		<h1>NanoHanzi</h1>
+		<h3>Can findout <span id="datasize"></span></h3>
+	</div>
+	<div id="sk_toolbar">
+		<input id="input" class="han" />
+		<button title="清除" id="buttClear">Cl</button>
+		<button title="解构" id="buttDecompose">Ds</button>
+		<!--button title="独体" onclick="UI.clearFind();UI.key('#')"><b>#</b></button-->
+		<button title="查找" id="buttGo">Fn</button>
+		<script type="text/javascript" src="js/infotab.js" encoding="utf-8"></script>
+		<script type="text/javascript" src="js/user.js" encoding="utf-8"></script>
+		<h5>Version: <script>WritedownVersion()</script></h5>
+	</div>
+</div>
+
+<div id="funcs">
+	<span>Press Enter or "Search" twice to check the Chinese characters in the expansion area!</span>
+	<label><input type="checkbox" id="variant" onclick="UI.setMode(this, 'variant')">Contains variants</label>
+	<label><input type="checkbox" id="subdivide" onclick="UI.setMode(this, 'subdivide')">Forcibly split glyphs</label>
+	<label><input type="checkbox" id="showkeypad">Parts keypad</label>
+	<span id="scKey" class="grp">Shortcuts：</span>
+</div>
+
+<div id="keyboard">
+	<div id="keypad"></div>
+</div>
+
+<div id="result">
+	<div id="legend">
+		<!--<span class="sizebtn btn" onclick="UI.updatePad()">＋</span>
+		<span class="sizebtn btn" onclick="UI.updatePad()">－</span>　　　-->
+		<span class="zone"><button class="BSC" onclick="UI.key('#')">基</button>Basic</span>
+		<span class="zone"><button class="ExA" onclick="UI.key('A')">A</button>ExtA</span>
+		<span class="zone"><button class="ExB" onclick="UI.key('B')">B</button>ExtB</span>
+		<span class="zone"><button class="ExC" onclick="UI.key('C')">C</button>ExtC</span>
+		<span class="zone"><button class="ExD" onclick="UI.key('D')">D</button>ExtD</span>
+		<span class="zone"><button class="ExE" onclick="UI.key('E')">E</button>ExtE</span>
+		<span class="zone"><button class="ExF" onclick="UI.key('F')">F</button>ExtF</span>
+		<span class="zone"><button class="ExG" onclick="UI.key('G')">G</button>ExtG</span>
+		<span class="zone"><button class="ExH" onclick="UI.key('H')">H</button>ExtH</span>
+		<span class="zone"><button class="ExI" onclick="UI.key('I')">I</button>ExtI</span>
+		<span class="zone"><button class="ExJ" onclick="UI.key('J')">J</button>ExtJ</span>
+		<span class="zone"><button class="ExK" onclick="UI.key('K')">K</button>ExtK</span>
+		<span class="zone"><button class="ExL" onclick="UI.key('L')">L</button>ExtL</span>
+		<span class="zone"><button class="ExM" onclick="UI.key('M')">M</button>ExtM</span>
+		<span class="zone"><button class="ExN" onclick="UI.key('N')">N</button>ExtN</span>
+		<span class="zone"><button class="ExO" onclick="UI.key('O')">O</button>ExtO</span>
+		<span class="zone"><button class="ExP" onclick="UI.key('P')">P</button>ExtP</span>
+		<span class="zone"><button class="CMP" onclick="UI.key('X')">兼</button>Compatible</span>
+		<span class="zone"><button class="SUP" onclick="UI.key('Y')">私</button>Private</span>
+		<span class="zone"><button class="OTH" onclick="UI.key('Z')">它</button>Other</span>
+		<!--注意J和K是预留区-->
+		<span id="counter"></span>
+	</div>
+	<div id="groups" class="han">
+	</div>
+	<div id="output" class="han"></div>
+</div>
+<div id="popview">
+	<span id="bigchar" class="han"></span>
+	<span id="codetag"></span>
+	<span id="menu_key" class="func">Type</span>
+	<a id="menu_go" class="func" target="_blank">Use 字統</a>
+	<span id="menu_query" class="func">Subs</span>
+	<span id="menu_copy" class="func">Copy</span>
+	<span id="menu_skip" class="func">Exclude</span>
+	<span class="els">
+		<span id="menu_add" class="func">Join SC</span>
+		<span id="menu_del" class="func">Exit SC</span>
+	</span>
+</div>
+
+<div class="set-v2-popup" style="display: none;">
+	<div class="set-v2-popup-container">
+		<div class="set-v2-popup-block">
+			<div class="set-v2-popup-symbol"></div>
+			<div class="set-v2-popup-text">Copyed！</div>
+		</div>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="js/jquery-3.6.0.min.js" encoding="utf-8"></script>
+<script type="text/javascript" src="js/handata_uni.js" encoding="utf-8"></script>
+<script type="text/javascript">
+var Config = {
+	// $CHR$ 表示未经编码的汉字变量
+	// $ENC$ 表示经URI编码的汉字变量
+	// $UCD$ 表示汉字的10进制Unicode变量
+	// $UCh$ 表示汉字的16进制小写Unicode变量
+	// $UCH$ 表示汉字的16进制大写Unicode变量
+	url: 'https://zi.tools/zi/$ENC$',
+
+	// GlyphWiki网站的图片网址，默认输出uxxxxx.svg
+	glyphwiki: '',
+
+	// 指定哪个Range要采用图片显示 (true=图片显示，false=文本显示)
+	// 1：基本；2：扩A。以此类推 5：D 
+	useImage: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false,11: false, 27: false, 28: false, 29: false, 30: false, },
+	// useImage: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false, 11: false, 27: false, 28: false, 29: false, 30: false, 31: false},
+	resultStep1: 299,
+	resultStep2: 1999
+}
+
+</script>
+<script type="text/javascript" src="js/seeker.js" encoding="utf-8"></script>
+
+<div id="downside">
+	<dev align="center">
+		<h5>Copyright 2024 : <var>H.S.S. - NANOFONT ©</var>, <var>H.S.S. - HAUCODE ©</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Contact: <a href="mailto://3582930858@qq.com" id="fmailto"><script>Writedown(Contact)</script></a></span></h5>
+	</dev>
+</div>
+
+</body></html>

@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head><title>HSS - 納米檢字</title><meta charset="utf-8">
+	<!--Make by HSS - NANOFONT-->
+
+<script>
+	var time;
+	var popup;
+	var q;
+	function pop(ch)
+	{
+		time = 0;
+		var btnValue = document.getElementsByClassName("set-v2-popup-symbol")[0];
+		btnValue.innerHTML = ch;
+		popup = document.getElementsByClassName("set-v2-popup")[0];
+		clearInterval(q);
+		q = setInterval(function(){opa()},50);	
+	}
+	function opa()
+	{
+		var op;
+		if (time < 0.5)
+			{
+				op= - 4 * time * time + 4 * time;
+			}
+		else if (time >1)
+			{
+				op = - 4 * time * time + 8 * time - 3;
+			}
+		else
+			{
+				op = 1;
+			}
+		popup.style = "display: block;opacity: " + op + ";";
+		if (op < 0)
+			{
+				op = 0;
+				time = -0.05;
+				popup.style = "display: none;";
+				clearInterval(q);
+			}
+		time += 0.05;
+	}
+	fuction 
+</script>
+<link rel="icon" type="image/x-icon" href="./icon/main.ico" />
+</head>
+<body>
+
+
+
+<link rel="stylesheet" type="text/css" href="style.css"/>
+
+
+<div id="main">
+
+<!-- UI 画面区 -->
+<div id="sk_header">
+	<div id="sk_logo">
+		<h1>納米檢字</h1>
+		<h3>可搜尋<span id="datasize"></span>字</h3>
+	</div>
+	<div id="sk_toolbar">
+		<input id="input" class="han" />
+		<button title="清除" id="buttClear">清</button>
+		<button title="解构" id="buttDecompose">拆</button>
+		<!--button title="独体" onclick="UI.clearFind();UI.key('#')"><b>#</b></button-->
+		<button title="查找" id="buttGo">查</button>
+		<script type="text/javascript" src="js/infotab.js" encoding="utf-8"></script>
+		<script type="text/javascript" src="js/user.js" encoding="utf-8"></script>
+		<h5>版本:<script>WritedownVersion()</script></h5>
+	</div>
+</div>
+
+<div id="funcs">
+	<span>按下Enter鍵兩次或者按下"查"按钮兩次可以查詢擴展區的漢字</span>
+	<label><input type="checkbox" id="variant" onclick="UI.setMode(this, 'variant')">包含異體</label>
+	<label><input type="checkbox" id="subdivide" onclick="UI.setMode(this, 'subdivide')">强行拆分</label>
+	<label><input type="checkbox" id="showkeypad">部件鍵盤</label>
+	<span id="scKey" class="grp">快捷欄：</span>
+</div>
+
+<div id="keyboard">
+	<div id="keypad"></div>
+</div>
+
+<div id="result">
+	<div id="legend">
+		<!--<span class="sizebtn btn" onclick="UI.updatePad()">＋</span>
+		<span class="sizebtn btn" onclick="UI.updatePad()">－</span>　　　-->
+		<span class="zone"><button class="BSC" onclick="UI.key('#')">基</button>基本</span>
+		<span class="zone"><button class="ExA" onclick="UI.key('A')">A</button>A区</span>
+		<span class="zone"><button class="ExB" onclick="UI.key('B')">B</button>B区</span>
+		<span class="zone"><button class="ExC" onclick="UI.key('C')">C</button>C区</span>
+		<span class="zone"><button class="ExD" onclick="UI.key('D')">D</button>D区</span>
+		<span class="zone"><button class="ExE" onclick="UI.key('E')">E</button>E区</span>
+		<span class="zone"><button class="ExF" onclick="UI.key('F')">F</button>F区</span>
+		<span class="zone"><button class="ExG" onclick="UI.key('G')">G</button>G区</span>
+		<span class="zone"><button class="ExH" onclick="UI.key('H')">H</button>H区</span>
+		<span class="zone"><button class="ExI" onclick="UI.key('I')">I</button>I区</span>
+		<span class="zone"><button class="ExJ" onclick="UI.key('J')">J</button>J区</span>
+		<span class="zone"><button class="ExK" onclick="UI.key('K')">K</button>K区</span>
+		<span class="zone"><button class="ExL" onclick="UI.key('L')">L</button>L区</span>
+		<span class="zone"><button class="ExM" onclick="UI.key('M')">M</button>M区</span>
+		<span class="zone"><button class="ExN" onclick="UI.key('N')">N</button>N区</span>
+		<span class="zone"><button class="ExO" onclick="UI.key('O')">O</button>O区</span>
+		<span class="zone"><button class="ExP" onclick="UI.key('P')">P</button>P区</span>
+		<span class="zone"><button class="CMP" onclick="UI.key('X')">兼</button>兼容</span>
+		<span class="zone"><button class="SUP" onclick="UI.key('Y')">自</button>自用</span>
+		<span class="zone"><button class="OTH" onclick="UI.key('Z')">它</button>其它</span>
+		<!--注意J和K是预留区-->
+		<span id="counter"></span>
+	</div>
+	<div id="groups" class="han">
+	</div>
+	<div id="output" class="han"></div>
+</div>
+<div id="popview">
+	<span id="bigchar" class="han"></span>
+	<span id="codetag"></span>
+	<span id="menu_key" class="func">鍵入</span>
+	<a id="menu_go" class="func" target="_blank">字統網搜尋</a>
+	<span id="menu_query" class="func">替換搜尋</span>
+	<span id="menu_copy" class="func">複製此字形</span>
+	<span id="menu_skip" class="func">排除此字形</span>
+	<span class="els">
+		<span id="menu_add" class="func">加入快捷欄</span>
+		<span id="menu_del" class="func">移除快捷欄</span>
+	</span>
+</div>
+
+<div class="set-v2-popup" style="display: none;">
+	<div class="set-v2-popup-container">
+		<div class="set-v2-popup-block">
+			<div class="set-v2-popup-symbol"></div>
+			<div class="set-v2-popup-text">複製完畢！</div>
+		</div>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="js/jquery-3.6.0.min.js" encoding="utf-8"></script>
+<script type="text/javascript" src="js/handata_uni.js" encoding="utf-8"></script>
+<script type="text/javascript">
+var Config = {
+	// $CHR$ 表示未经编码的汉字变量
+	// $ENC$ 表示经URI编码的汉字变量
+	// $UCD$ 表示汉字的10进制Unicode变量
+	// $UCh$ 表示汉字的16进制小写Unicode变量
+	// $UCH$ 表示汉字的16进制大写Unicode变量
+	url: 'https://zi.tools/zi/$ENC$',
+
+	// GlyphWiki网站的图片网址，默认输出uxxxxx.svg
+	glyphwiki: '',
+
+	// 指定哪个Range要采用图片显示 (true=图片显示，false=文本显示)
+	// 1：基本；2：扩A。以此类推 5：D 
+	useImage: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false,11: false, 27: false, 28: false, 29: false, 30: false, },
+	// useImage: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false, 11: false, 27: false, 28: false, 29: false, 30: false, 31: false},
+	resultStep1: 299,
+	resultStep2: 1999
+}
+
+</script>
+<script type="text/javascript" src="js/seeker.js" encoding="utf-8"></script>
+
+<div id="downside">
+	<dev align="center">
+		<h5>Copyright 2024 : <var>H.S.S. - NANOFONT ©</var>, <var>H.S.S. - HAUCODE ©</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Contact: <a href="mailto://3582930858@qq.com" id="fmailto"><script>Writedown(Contact)</script></a></span></h5>
+	</dev>
+</div>
+
+</body></html>
