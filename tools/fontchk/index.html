@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"/>
+<meta name="author" content="Hansha"/>
+<title>纳米字库字体预览</title>
+<link rel="shortcut icon" href="icon.png" type="image/png"/>
+<style>
+@import url('https://static.zeoseven.com/zsft/310/main/result.css');
+@import url('https://static.zeoseven.com/zsft/323/main/result.css');
+@import url('https://static.zeoseven.com/zsft/324/main/result.css');
+@import url('https://static.zeoseven.com/zsft/467/main/result.css');
+@import url('https://static.zeoseven.com/zsft/468/main/result.css');
+@import url('https://static.zeoseven.com/zsft/451/main/result.css');
+@import url('https://static.zeoseven.com/zsft/296/main/result.css');
+@import url('https://static.zeoseven.com/zsft/471/main/result.css');
+
+*[title]:after{content:attr(title);font-size:.8rem;font-feature-settings:'zero';color:#FFF;background:#50A9;border-radius:.2em;padding:.2ex .8ch;position:absolute;visibility:hidden;z-index:1}
+*[title]:hover:after{visibility:visible}
+
+@media(min-width:85em) and (max-width:999em){
+body{grid-template-columns:1fr 5fr minmax(20em,2fr) 0em;grid-template-rows:3fr 1fr;grid-gap:.5em}
+nav{grid-area:1/3/3/3}
+main{grid-area:1/2/3/2}
+footer{grid-column:2}
+aside{grid-area:1}
+aside th{font-size:.9em}
+	}
+
+@media(max-width:85em){
+body{grid-template-columns:5fr minmax(10em,2fr) .5em;grid-template-rows:2fr 5fr 3em;grid-gap:.5em}
+nav{grid-area:1/2/1/1}
+main{grid-area:2/1/3/3}
+footer{grid-column:2}
+aside{grid-area:2/2/1/2}
+aside th{font-size:.8em}aside td{font-size:1.5em}
+	}
+
+body{display:grid;position:fixed;height:100%;width:100%;font-family:NanoOldSong-A, NanoOldSong-B;font-size:100%;color:#222}
+header{margin:1em;background:#FFFC;z-index:1}
+p{margin:0 0 1em;font-size:.9em}
+nav{overflow:auto;
+	scrollbar-width:thin}
+nav li{font-size:1em}
+nav > h2{text-align:right;margin:1em 2em}
+main{overflow:auto;position:relative;padding:0 0 1em 2em;
+	scrollbar-width:thin}
+	nav::-webkit-scrollbar,main::-webkit-scrollbar{width:.5em;height:.5em}
+	nav::-webkit-scrollbar-thumb,main::-webkit-scrollbar-thumb{border-radius:1em;background:#CCC}
+	nav::-webkit-scrollbar-track,main::-webkit-scrollbar-track{border-radius:1em;box-shadow:inset 0 0 .5em #DDD}
+	main::-webkit-scrollbar-corner{box-shadow:-.5em -.5em 1em #07F}
+aside{margin:auto}
+label{line-height:2em;background:#FFFC;box-shadow:0 0 1em 1em #FFFC;position:fixed;z-index:1}
+h1{font-size:2.5em;font-weight:normal;margin:1.5em 0 .5em}
+h2{font-size:1.5em;font-weight:normal;margin:1.5em 0 0}
+h2:before{font-size:.8em;color:#08F0;content:"☯";position:relative;top:-.5em;transition:.5s}h2:hover:before{color:#CCC;top:-.2em}
+h3{font-size:1.2em;font-weight:normal;margin:1em;text-align:right}
+select,option,pre{font-family:inherit}
+@keyframes wave{from{background-position:0 100%}to{background-position:-2em 100%}}
+@keyframes beat{from{transform:scale(1)}to{transform:scale(1.2)}}
+a{color:#F07;text-decoration:none}
+a:hover{color:#07F;animation:wave 1s infinite linear;
+	background:linear-gradient(45deg,#09F9 0%,#07F1 20%,#07F3 50%,#09F9 50%) repeat-x;background-size:2em .2em}
+a:active{background-size:1em .25em}
+a[target]:after{content:'🔗';color:#07F;font-size:.8em;vertical-align:text-top}
+header a[target]:after{font-size:1em!important;position:relative;top:-.5em}
+b:after{font-weight:normal;margin:-1.5em -2em}
+table{border-spacing:0;border:solid 1px #CCC;background:#EEE;text-align:center}
+caption{text-align:left;margin:.8em 0}
+th{border:solid 1px #CCC;padding:.5em .2em;font-weight:normal;font-feature-settings:'hwid','lnum','zero'}
+td{border:solid 1px #CCC;font-size:2em;background:#FFF;width:1.2em;white-space:nowrap}
+td[title]:after{margin:-3em}
+.th{font-size:1em;padding:.6em .2em;white-space:normal}
+tfoot{text-align:left}
+ul{list-style:disc inside url("data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='5' fill='%23CCC'/%3E%3Cpath fill='%23CCC' d='M8 8h5v5H8z'%3E%3CanimateTransform attributeName='transform' type='rotate' begin='0s' dur='8s' from='0 8 8' to='360 8 8' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E");margin:.2em;padding:0}
+ol{list-style:decimal inside;margin:.2em}
+li{margin:0 1em}
+li:hover:first-letter{color:#08F}
+.addu{font-size:.9em;padding:.2em .5em;list-style:none}.addu:before{content:"※ "}
+rt{font-size:.7em}
+::selection{background:#FF9B}
+.mgg{background:linear-gradient(217deg,#F071,#0000 60%),linear-gradient(127deg,#07F1,#0000 60%),linear-gradient(336deg,#FFE,#FFF 60%)}
+.dis{color:#F90;background:#FD8;background:repeating-linear-gradient(45deg,#0000,#0000 1em,#FFF 1em,#FFF 1.2em),repeating-linear-gradient(-45deg,#FD8,#FD8 1em,#FFF 1em,#FFF 1.2em,#FD8 1.2em)}
+.dis:after{background:#F909}
+.lnum{color:rgba(12, 75, 75, 0.6);background:rgba(12, 75, 75, 0.6)!important}.lnum:after{background:rgba(12, 75, 75, 0.6)}
+.hwid{box-shadow:inset .6em 0 #57F5}.hwid:after{background:#57F9}
+.zero{color:#E16;background:#FEE}.zero:after{background:#F079}
+.to{color:#05FE;background:#07F3;background:
+	linear-gradient(45deg,#FFF 25%,#0000 25%,#0000 75%,#FFF 75%,#FFF),
+	linear-gradient(45deg,#FFF 26%,#0000 26%,#0000 74%,#FFF 74%,#FFF);
+	background-size:.4em .4em;background-position:0 0,.2em .2em}
+.to:after{background:#07FB}
+.ok{color:rgba(178, 54, 202, 0.933);}
+.do{color:#FFF;background:#333}.do:after{background:#755B}
+.bk{color:#FFBD;background:#FFB;background:repeating-linear-gradient(30deg,#755 .1em,#300 .1em,#300 .2em,#755 .2em,#755 .3em)}
+.bk:after{color:#FF3;background:#3007}
+.qu{color:#9990;background:#CCC}.qu:after{background:#0005}
+
+textarea{width:90%;font-size:2em;font-family:NanoOldSong-A, NanoOldSong-B;padding:.3em;line-height:1.7em;border:solid .1em rgb(81, 158, 139);border-radius:.2em;white-space:pre-line}
+textarea:focus{border-color:#07F;animation:wave .6s infinite linear;
+	background:linear-gradient(45deg,#09F9 0%,#07F1 20%,#07F3 50%,#09F9 50%) repeat-x;background-size:2em .1em}
+</style>
+	</head>
+
+
+<body id="testFont">
+
+<nav>
+<textarea id="fontck" rows="2" placeholder="字体测试
+1234 一二三四 简体繁體 ㄅㄆㄇㄈ 𠀀𠀁𪛖𪛟 𪜀𪜁𫜴𫜹 𫝀𫝁𫠜𫠝 𫠠𫠡𬺠𬺡 𬺰𬺱𮯟𮯠 𰀀𰀁𱍉𱍊 𱍐𱍑𲎮𲎯 𮯰𮯱𮹜𮹝 豈龎丽𪘀
+纳米之字，言语所赐">
+</textarea>
+
+<a href="#nav" style="text-shadow:0 0 1em #FFF;position:fixed;right:2em;bottom:1em"><div style="display:inline-block;animation:beat 1s infinite alternate"></div></a>
+	</nav>
+
+<aside>
+<table><tbody>
+<tr><td colspan="2" class="th mgg">图例</td></tr>
+<tr><th>区块可用</th><td title="可用字形区域">汉</td></tr>
+<tr><th>区块待修复</th><td class="hwid" title="可用但待修复字形区域">修</td></tr>
+<tr><th>区块字形短缺</th><td class="zero" title="可用但字形短缺字形区域">缺</td></tr>
+<tr><th>区块待定</th><td class="do" title="待定可用字形区域">暂</td></tr>
+<tr><th>无字形可用</th><td class="qu" title="没有字形的区域">无</td></tr>
+<tr><th>区块可用(未来)</th><td class="to" title="未来将可用的字形区域">来</td></tr>
+<tr><th>区块丢失</th><td class="bk" title="字形区域原文件丢失">失</td></tr>
+<tr><th>区块不可用</th><td class="dis" title="区域内的字形有bug">否</td></tr>
+<tr><th>区块字符数少</th><td class="lnum" title="字形区域中的字符很少">少</td></tr>
+<tr><th>区块更新完毕但未发布</th><td class="ok" title="区块内的字形已经更新完毕但未发布">发</td></tr>
+
+	</tbody></table>
+	</aside>
+
+<main>
+<h2 id="UNI">纳米字库所有字体文件综合支持区块</h2>
+<table>
+<thead>
+<tr><td colspan="17" class="th">BMP</td></tr>
+	</thead>
+<tfoot>
+<tbody>
+<tr><th>\</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+
+<tr><th>0</th>
+<td class="zero">00</td>
+<td class="">01</td>
+<td class="">02</td>
+<td class="zero">03</td>
+<td class="zero">04</td>
+<td class="zero lnum">05</td>
+<td class="zero">06</td>
+<td class="zero lnum">07</td>
+<td class="zero lnum">08</td>
+<td class="qu">09</td>
+<td class="qu">0A</td>
+<td class="qu">0B</td>
+<td class="qu">0C</td>
+<td class="qu">0D</td>
+<td class="qu">0E</td>
+<td class="qu">0F</td>
+
+<tr><th>1</th>
+	<td class="zero lnum">10</td>
+	<td class="">11</td>
+	<td class="">12</td>
+	<td class="qu">13</td>
+	<td class="qu">14</td>
+	<td class="qu">15</td>
+	<td class="qu">16</td>
+	<td class="qu">17</td>
+	<td class="qu">18</td>
+	<td class="qu">19</td>
+	<td class="zero lnum">1A</td>
+	<td class="qu">1B</td>
+	<td class="zero lnum">1C</td>
+	<td class="zero">1D</td>
+	<td class="zero">1E</td>
+	<td class="zero">1F</td>
+
+<tr><th>2</th>
+		<td class="zero">20</td>
+		<td class="zero">21</td>
+		<td class="">22</td>
+		<td class="zero">23</td>
+		<td class="zero">24</td>
+		<td class="">25</td>
+		<td class="zero lnum">26</td>
+		<td class="zero lnum">27</td>
+		<td class="">28</td>
+		<td class="zero lnum">29</td>
+		<td class="zero lnum">2A</td>
+		<td class="zero lnum">2B</td>
+		<td class="zero lnum">2C</td>
+		<td class="zero">2D</td>
+		<td class="zero">2E</td>
+		<td class="">2F</td>
+
+		<tr><th>3</th>
+			<td class="">30</td>
+			<td class="zero">31</td>
+			<td class="">32</td>
+			<td class="zero">33</td>
+			<td class="">34</td>
+			<td class="">35</td>
+			<td class="">36</td>
+			<td class="">37</td>
+			<td class="">38</td>
+			<td class="">39</td>
+			<td class="">3A</td>
+			<td class="">3B</td>
+			<td class="">3C</td>
+			<td class="">3D</td>
+			<td class="">3E</td>
+			<td class="">3F</td>
+
+			<tr><th>4</th>
+				<td class="">40</td>
+				<td class="">41</td>
+				<td class="">42</td>
+				<td class="">43</td>
+				<td class="">44</td>
+				<td class="">45</td>
+				<td class="">46</td>
+				<td class="">47</td>
+				<td class="">48</td>
+				<td class="">49</td>
+				<td class="">4A</td>
+				<td class="">4B</td>
+				<td class="">4C</td>
+				<td class="">4D</td>
+				<td class="">4E</td>
+				<td class="">4F</td>
+
+				<tr><th>5</th>
+					<td class="">50</td>
+					<td class="">51</td>
+					<td class="">52</td>
+					<td class="">53</td>
+					<td class="">54</td>
+					<td class="">55</td>
+					<td class="">56</td>
+					<td class="">57</td>
+					<td class="">58</td>
+					<td class="">59</td>
+					<td class="">5A</td>
+					<td class="">5B</td>
+					<td class="">5C</td>
+					<td class="">5D</td>
+					<td class="">5E</td>
+					<td class="">5F</td>
+
+					<tr><th>6</th>
+						<td class="">60</td>
+						<td class="">61</td>
+						<td class="">62</td>
+						<td class="">63</td>
+						<td class="">64</td>
+						<td class="">65</td>
+						<td class="">66</td>
+						<td class="">67</td>
+						<td class="">68</td>
+						<td class="">69</td>
+						<td class="">6A</td>
+						<td class="">6B</td>
+						<td class="">6C</td>
+						<td class="">6D</td>
+						<td class="">6E</td>
+						<td class="">6F</td>
+
+						<tr><th>7</th>
+							<td class="">70</td>
+							<td class="">71</td>
+							<td class="">72</td>
+							<td class="">73</td>
+							<td class="">74</td>
+							<td class="">75</td>
+							<td class="">76</td>
+							<td class="">77</td>
+							<td class="">78</td>
+							<td class="">79</td>
+							<td class="">7A</td>
+							<td class="">7B</td>
+							<td class="">7C</td>
+							<td class="">7D</td>
+							<td class="">7E</td>
+							<td class="">7F</td>
+
+							<tr><th>8</th>
+								<td class="">80</td>
+								<td class="">81</td>
+								<td class="">82</td>
+								<td class="">83</td>
+								<td class="">84</td>
+								<td class="">85</td>
+								<td class="">86</td>
+								<td class="">87</td>
+								<td class="">88</td>
+								<td class="">89</td>
+								<td class="">8A</td>
+								<td class="">8B</td>
+								<td class="">8C</td>
+								<td class="">8D</td>
+								<td class="">8E</td>
+								<td class="">8F</td>
+
+								<tr><th>9</th>
+									<td class="">90</td>
+									<td class="">91</td>
+									<td class="">92</td>
+									<td class="">93</td>
+									<td class="">94</td>
+									<td class="">95</td>
+									<td class="">96</td>
+									<td class="">97</td>
+									<td class="">98</td>
+									<td class="">99</td>
+									<td class="">9A</td>
+									<td class="">9B</td>
+									<td class="">9C</td>
+									<td class="">9D</td>
+									<td class="">9E</td>
+									<td class="">9F</td>
+
+									<tr><th>A</th>
+										<td class="qu">A0</td>
+										<td class="qu">A1</td>
+										<td class="qu">A2</td>
+										<td class="qu">A3</td>
+										<td class="qu">A4</td>
+										<td class="qu">A5</td>
+										<td class="zero lnum">A6</td>
+										<td class="zero">A7</td>
+										<td class="qu">A8</td>
+										<td class="zero lnum">A9</td>
+										<td class="qu">AA</td>
+										<td class="zero lnum">AB</td>
+										<td class="">AC</td>
+										<td class="">AD</td>
+										<td class="">AE</td>
+										<td class="">AF</td>
+
+										<tr><th>B</th>
+											<td class="">B0</td>
+											<td class="">B1</td>
+											<td class="">B2</td>
+											<td class="">B3</td>
+											<td class="">B4</td>
+											<td class="">B5</td>
+											<td class="">B6</td>
+											<td class="">B7</td>
+											<td class="">B8</td>
+											<td class="">B9</td>
+											<td class="">BA</td>
+											<td class="">BB</td>
+											<td class="">BC</td>
+											<td class="">BD</td>
+											<td class="">BE</td>
+											<td class="">BF</td>
+
+											<tr><th>C</th>
+												<td class="">C0</td>
+												<td class="">C1</td>
+												<td class="">C2</td>
+												<td class="">C3</td>
+												<td class="">C4</td>
+												<td class="">C5</td>
+												<td class="">C6</td>
+												<td class="">C7</td>
+												<td class="">C8</td>
+												<td class="">C9</td>
+												<td class="">CA</td>
+												<td class="">CB</td>
+												<td class="">CC</td>
+												<td class="">CD</td>
+												<td class="">CE</td>
+												<td class="">CF</td>
+											
+												<tr><th>D</th>
+													<td class="">D0</td>
+													<td class="">D1</td>
+													<td class="">D2</td>
+													<td class="">D3</td>
+													<td class="">D4</td>
+													<td class="">D5</td>
+													<td class="">D6</td>
+													<td class="">D7</td>
+													<td class="qu">D8</td>
+													<td class="qu">D9</td>
+													<td class="qu">DA</td>
+													<td class="qu">DB</td>
+													<td class="qu">DC</td>
+													<td class="qu">DD</td>
+													<td class="qu">DE</td>
+													<td class="qu">DF</td>
+
+													<tr><th>E</th>
+														<td class="do">E0</td>
+														<td class="do">E1</td>
+														<td class="do">E2</td>
+														<td class="do">E3</td>
+														<td class="do">E4</td>
+														<td class="do">E5</td>
+														<td class="do">E6</td>
+														<td class="do">E7</td>
+														<td class="do">E8</td>
+														<td class="do">E9</td>
+														<td class="do">EA</td>
+														<td class="do">EB</td>
+														<td class="do">EC</td>
+														<td class="do">ED</td>
+														<td class="do">EE</td>
+														<td class="do">EF</td>
+
+														<tr><th>F</th>
+															<td class="do">F0</td>
+															<td class="do">F1</td>
+															<td class="do">F2</td>
+															<td class="do">F3</td>
+															<td class="do">F4</td>
+															<td class="do">F5</td>
+															<td class="do">F6</td>
+															<td class="do">F7</td>
+															<td class="do">F8</td>
+															<td class="">F9</td>
+															<td class="">FA</td>
+															<td class="zero lnum">FB</td>
+															<td class="zero lnum">FC</td>
+															<td class="zero lnum">FD</td>
+															<td class="zero lnum">FE</td>
+															<td class="">FF</td>
+</tbody></table>
+
+	</main>	
+
+
+<footer>
+<label style="left:1em;bottom:1em">字体选择：<select onchange="testFont.style.fontFamily = this.value;fontck.style.fontFamily = this.value;">
+<option selected="selected" value="NanoOldSong-A, NanoOldSong-B">纳米老宋</option>
+<option value="NanoFullSong">纳米丰宋</option>
+<option value="NanoWoodHei">纳米松木黑</option>
+<option value="NanoWoodHei Mono">纳米松木黑 Mono</option>
+<option value="NanoKongHinhHei">纳米空型黑</option>
+<option value="NanoPyongHanHei">纳米平汉黑</option>
+<option value="NanoLhaTinhHei">纳米拉丁黑</option>
+<option value="serif">System Serif</option>
+<option value="sans-serif">System Sans</option>
+	</select>
+
+</label>
+
+<label style="left:1em;bottom:4em">字体大小：<select onchange="fontck.style.fontSize = this.value;">
+	<option value="25%">25%</option>
+	<option value="50%">50%</option>
+	<option value="75%">75%</option>
+	<option value="100%">100%</option>
+	<option value="125%">125%</option>
+	<option value="150%">150%</option>
+	<option value="175%">175%</option>
+	<option selected="selected" value="200%">200% (Normal)</option>
+	<option value="225%">225%</option>
+	<option value="250%">250%</option>
+	<option value="275%">275%</option>
+	<option value="300%">300%</option>
+	<option value="350%">350%</option>
+	<option value="400%">400%</option>
+	<option value="450%">450%</option>
+	<option value="500%">500%</option>
+	<option value="600%">600%</option>
+	<option value="700%">700%</option>
+	<option value="800%">800%</option>
+	<option value="900%">900%</option>
+	<option value="1000%">1000%</option>
+		</select>
+	
+	</label>
+	
+
+	</footer>
+</html>
