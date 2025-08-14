@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<title>404 - NOT FOUND</title>
+<style>
+@import url("_fonts/24/result.css");
+@import url("_fonts/24s/result.css");
+@import url("https://fontsapi.zeoseven.com/217/main/result.css");
+:root{--bg:#000000;--fg:#ffffff;--bar:#0000aa;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:"CLFN 24x CN","SimHei",monospace;
+  font-size:22px;
+}
+/* 漂浮字符层 */
+#matrix{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+.char{
+  position:absolute;
+  top:-20px;
+  color:rgba(255,255,255,.6);
+  font-size:18px;
+  animation:drop linear infinite;
+}
+@keyframes drop{
+  to{transform:translateY(110vh);}
+}
+
+/* 中央内容 */
+#box{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  opacity:0;
+  animation:fadeIn 1.2s ease forwards;
+}
+h1{letter-spacing:2px;margin-bottom:16px}
+button{
+  padding:8px 20px;
+  border:none;
+  background:var(--fg);
+  color:var(--bg);
+  font-family:inherit;
+  font-size:20px;
+  cursor:pointer;
+  opacity:0;
+  animation:fadeIn 1.2s ease .4s forwards;
+  transition:background .2s;
+}
+button:hover{background:#525252;color:#ffffff;transition:all .2s;}
+#footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:44px;
+  background:var(--bar);
+  color:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+@keyframes fadeIn{to{opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- 漂浮字符背景 -->
+<div id="matrix"></div>
+
+<!-- 中央内容 -->
+<div id="box">
+  <h1>404 - FILE NOT FOUND</h1>
+  <button onclick="location.href='/'">回到主页</button>
+</div>
+
+<div id="footer">Copyright © 2024-2025 NANOFONT - All Rights Reserved</div>
+
+<script>
+/* 生成漂浮字符 */
+const matrix = document.getElementById('matrix');
+const chars  = '?'.split('');
+const cols   = 60;
+for (let i = 0; i < cols; i++){
+  const span  = document.createElement('span');
+  span.className = 'char';
+  span.textContent = chars[Math.random()*chars.length|0];
+  span.style.left  = (i/cols*100) + '%';
+  span.style.animationDuration = (Math.random()*3+2) + 's';
+  span.style.animationDelay    = (Math.random()*3) + 's';
+  matrix.appendChild(span);
+}
+</script>
+</body>
+</html>
