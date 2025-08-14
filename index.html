@@ -6,7 +6,7 @@
 <style>
 @import url("_fonts/24/result.css");
 @import url("_fonts/24s/result.css");
-@import url("https://fontsapi.zeoseven.com/217/main/result.css");
+@import url("_fonts/ds/result.css");
 :root{
     --bg:#000000;
     --fg:#ffffff;
@@ -16,7 +16,7 @@
 body{
     background:var(--bg);
     color:var(--fg);
-    font-family: "NanoStaticGuob18030Pixel24 R","NanoStaticGuob18030Pixel24S R","CLFN 24x CN",monospace;
+    font-family: "NanoStaticGuob18030Pixel24 R","NanoStaticGuob18030Pixel24S R","Px437 IBM VGA 8x16",monospace;
     font-size:22px;
     line-height:1.5;
     height:100vh;
@@ -230,7 +230,7 @@ EXIT    退出网页
 /* 字体切换 */
 function setFont(name){
     const map = {
-    t24:`"NanoStaticGuob18030Pixel24 R","NanoStaticGuob18030Pixel24S R","CLFN 24x CN",monospace`,
+    t24:`"NanoStaticGuob18030Pixel24 R","NanoStaticGuob18030Pixel24S R","Px437 IBM VGA 8x16",monospace`,
     consolas:`Consolas,monospace`
 };
     document.body.style.fontFamily = map[name] || 'monospace';
