@@ -2,11 +2,17 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+
 <title>NANOFONT - 纳米字库</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
     /* ===== 基本配色 ===== */
     
+    @import url("https://fontsapi.zeoseven.com/467/main/result.css");
+    @import url("https://fontsapi.zeoseven.com/467/b/result.css");
+    @import url("https://fontsapi.zeoseven.com/467/c/result.css");
+    @import url("https://fontsapi.zeoseven.com/467/d/result.css");
+
     .text-container {
             position: relative;
             display: inline-block;
@@ -41,7 +47,7 @@
         --shadow:rgba(0,0,0,.15);
         transition: all .3s;
     }
-    *{margin:0;padding:0;box-sizing:border-box;font-family:"STKaiti","KaiTi",serif;}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:NanoOldSong-A,NanoOldSong-B,NanoOldSong-C,NanoOldSong-D;}
 
     body{
         background:var(--paper);
@@ -119,7 +125,6 @@
     height:44px;
     background:var(--bar);
     color:#8d4949;
-    font-size:24px;
     font-weight:bold;
     display:flex;
     align-items:center;
@@ -160,6 +165,7 @@
     }
     header{animation:slideDown .8s ease-out forwards;}
 </style>
+<link rel="icon" type="image/x-icon" href="./_icon/main.ico" />
 </head>
 
 <body>
@@ -171,6 +177,9 @@
         <span class="tab" data-page="links">链接</span>
     </nav>
 </header>
+<div id="footer">
+    Copyright © 2024-2025 NANOFONT - All Rights Reserved
+</div>
 
 <!-- ===== 分隔页 ===== -->
 <section id="home"  class="page active">
@@ -221,8 +230,8 @@
 </script>
 </body>
 <footer>
-    <div id="footer">
+    <!--<div id="footer">
     Copyright © 2024-2025 NANOFONT - All Rights Reserved
-</div>
+</div>-->
 </footer>
 </html>
