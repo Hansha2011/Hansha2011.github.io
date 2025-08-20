@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head><title>HSS - ナノ字検</title><meta charset="utf-8">
+	<!--Make by HSS - NANOFONT-->
+	
+<script>
+	var time;
+	var popup;
+	var q;
+	function pop(ch)
+	{
+		time = 0;
+		var btnValue = document.getElementsByClassName("set-v2-popup-symbol")[0];
+		btnValue.innerHTML = ch;
+		popup = document.getElementsByClassName("set-v2-popup")[0];
+		clearInterval(q);
+		q = setInterval(function(){opa()},50);	
+	}
+	function opa()
+	{
+		var op;
+		if (time < 0.5)
+			{
+				op= - 4 * time * time + 4 * time;
+			}
+		else if (time >1)
+			{
+				op = - 4 * time * time + 8 * time - 3;
+			}
+		else
+			{
+				op = 1;
+			}
+		popup.style = "display: block;opacity: " + op + ";";
+		if (op < 0)
+			{
+				op = 0;
+				time = -0.05;
+				popup.style = "display: none;";
+				clearInterval(q);
+			}
+		time += 0.05;
+	}
+	fuction 
+</script>
+<link rel="icon" type="image/x-icon" href="./icon/main.ico" />
+</head>
+<body>
+
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+
+
+<div id="main">
+	
+<!-- UI 画面区 -->
+<div id="sk_header">
+	<div id="sk_logo">
+		<h1>ナノ字検</h1>
+		<h3>検索可能<span id="datasize"></span>字</h3>
+	</div>
+	<div id="sk_toolbar">
+		<input id="input" class="han" />
+		<button title="清除" id="buttClear">除去</button>
+		<button title="解构" id="buttDecompose">取り</button>
+		<!--button title="独体" onclick="UI.clearFind();UI.key('#')"><b>#</b></button-->
+		<button title="查找" id="buttGo">入力</button>
+		<script type="text/javascript" src="js/infotab.js" encoding="utf-8"></script>
+		<script type="text/javascript" src="js/user.js" encoding="utf-8"></script>
+		<h5>バージョン:<script>WritedownVersion()</script></h5>
+	</div>
+</div>
+
+<div id="funcs">
+	<span>Enterキーまたは「検索」を2回押すと、拡張エリアの漢字を確認できます。</span>
+	<label><input type="checkbox" id="variant" onclick="UI.setMode(this, 'variant')">バリエーション</label>
+	<label><input type="checkbox" id="subdivide" onclick="UI.setMode(this, 'subdivide')">強制分割</label>
+	<label><input type="checkbox" id="showkeypad">コンポーネントキーボード</label>
+	<span id="scKey" class="grp">近道：</span>
+</div>
+
+<div id="keyboard">
+	<div id="keypad"></div>
+</div>
+
+<div id="result">
+	<div id="legend">
+		<!--<span class="sizebtn btn" onclick="UI.updatePad()">＋</span>
+		<span class="sizebtn btn" onclick="UI.updatePad()">－</span>　　　-->
+		<span class="zone"><button class="BSC" onclick="UI.key('#')">基</button>基本エリア</span>
+		<span class="zone"><button class="ExA" onclick="UI.key('A')">A</button>ゾーンA</span>
+		<span class="zone"><button class="ExB" onclick="UI.key('B')">B</button>ゾーンB</span>
+		<span class="zone"><button class="ExC" onclick="UI.key('C')">C</button>ゾーンC</span>
+		<span class="zone"><button class="ExD" onclick="UI.key('D')">D</button>ゾーンD</span>
+		<span class="zone"><button class="ExE" onclick="UI.key('E')">E</button>ゾーンE</span>
+		<span class="zone"><button class="ExF" onclick="UI.key('F')">F</button>ゾーンF</span>
+		<span class="zone"><button class="ExG" onclick="UI.key('G')">G</button>ゾーンG</span>
+		<span class="zone"><button class="ExH" onclick="UI.key('H')">H</button>ゾーンH</span>
+		<span class="zone"><button class="ExI" onclick="UI.key('I')">I</button>ゾーンI</span>
+		<span class="zone"><button class="ExJ" onclick="UI.key('J')">J</button>ゾーンJ</span>
+		<span class="zone"><button class="ExK" onclick="UI.key('K')">K</button>ゾーンK</span>
+		<span class="zone"><button class="ExL" onclick="UI.key('L')">L</button>ゾーンL</span>
+		<span class="zone"><button class="ExM" onclick="UI.key('M')">M</button>ゾーンM</span>
+		<span class="zone"><button class="ExN" onclick="UI.key('N')">N</button>ゾーンN</span>
+		<span class="zone"><button class="ExO" onclick="UI.key('O')">O</button>ゾーンO</span>
+		<span class="zone"><button class="ExP" onclick="UI.key('P')">P</button>ゾーンP</span>
+		<span class="zone"><button class="CMP" onclick="UI.key('X')">互</button>互換ゾーン</span>
+		<span class="zone"><button class="SUP" onclick="UI.key('Y')">私</button>プライベートエリア</span>
+		<span class="zone"><button class="OTH" onclick="UI.key('Z')">它</button>その他のエリア</span>
+		<!--注意J和K是预留区-->
+		<span id="counter"></span>
+	</div>
+	<div id="groups" class="han">
+	</div>
+	<div id="output" class="han"></div>
+</div>
+<div id="popview">
+	<span id="bigchar" class="han"></span>
+	<span id="codetag"></span>
+	<span id="menu_key" class="func">入力</span>
+	<a id="menu_go" class="func" target="_blank">字統網検索</a>
+	<span id="menu_query" class="func">字の置換</span>
+	<span id="menu_copy" class="func">写し</span>
+	<span id="menu_skip" class="func">除外する</span>
+	<span class="els">
+		<span id="menu_add" class="func">近道を追加</span>
+		<span id="menu_del" class="func">近道を移出</span>
+	</span>
+</div>
+
+<div class="set-v2-popup" style="display: none;">
+	<div class="set-v2-popup-container">
+		<div class="set-v2-popup-block">
+			<div class="set-v2-popup-symbol"></div>
+			<div class="set-v2-popup-text">写しました！</div>
+		</div>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="js/jquery-3.6.0.min.js" encoding="utf-8"></script>
+<script type="text/javascript" src="js/handata_uni.js" encoding="utf-8"></script>
+<script type="text/javascript">
+var Config = {
+	// $CHR$ 表示未经编码的汉字变量
+	// $ENC$ 表示经URI编码的汉字变量
+	// $UCD$ 表示汉字的10进制Unicode变量
+	// $UCh$ 表示汉字的16进制小写Unicode变量
+	// $UCH$ 表示汉字的16进制大写Unicode变量
+	url: 'https://zi.tools/zi/$ENC$',
+
+	// GlyphWiki网站的图片网址，默认输出uxxxxx.svg
+	glyphwiki: '',
+
+	// 指定哪个Range要采用图片显示 (true=图片显示，false=文本显示)
+	// 1：基本；2：扩A。以此类推 5：D 
+	useImage: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false,11: false, 27: false, 28: false, 29: false, 30: false, },
+	// useImage: {1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false, 10: false, 11: false, 27: false, 28: false, 29: false, 30: false, 31: false},
+	resultStep1: 299,
+	resultStep2: 1999
+}
+
+</script>
+<script type="text/javascript" src="js/seeker.js" encoding="utf-8"></script>
+
+<div id="downside">
+	<dev align="center">
+		<h5>Copyright 2025 : <var>H.S.S. - NANOFONT ©</var>, <var>H.S.S. - HAUCODE ©</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Contact: <a href="mailto://3582930858@qq.com" id="fmailto"><script>Writedown(Contact)</script></a></span></h5>
+	</dev>
+	<dev align="right">
+		<h5><span><a href="https://github.com/Hansha2011/NanoOldSong" id="fmailto">Font Download</a></span></h5>
+	</dev>
+</div>
+
+</body></html>

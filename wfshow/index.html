@@ -1,0 +1,173 @@
+<!-- 在字体大小和字重滑动条下方添加OpenType特性单选框 -->
+<div class="slider-group">
+    <div class="slider-label"></div>
+    <meta charset="UTF-8">
+    <title>NANOFONT - CSS字体展示页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px;
+        }
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        #display {
+            margin-top: 30px;
+            padding: 24px;
+            border: 1px dashed #aaa;
+            border-radius: 6px;
+            font-size: 2rem;
+            background: #fafafa;
+            min-height: 60px;
+            transition: font-family 0.3s, font-size 0.2s, font-weight 0.2s;
+            word-break: break-all;
+        }
+        #loadBtn {
+            margin-bottom: 12px;
+            padding: 8px 16px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            background: #0078d4;
+            color: #fff;
+            cursor: pointer;
+        }
+        #loadBtn:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+        .slider-group {
+            margin-top: 18px;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+    </style>
+    <script>
+        alert('加载外部CSS文件字体时，请确保CSS文件中包含正确的font-family定义，且不能加载带有非法代码与病毒的CSS文件');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <label for="textInput">展示内容：</label>
+        <input type="text" id="textInput" value="字体展示 Font Preview" placeholder="字体展示 Font Preview">
+
+        <label for="cssUrlInput">外部CSS字体文件URL：</label>
+        <input type="text" id="cssUrlInput" placeholder="https://example.com/font.css">
+        <button id="loadBtn">加载字体</button>
+
+        <div class="slider-group">
+            <div class="slider-label">
+                <span>字体大小：</span>
+                <span id="fontSizeValue">2rem</span>
+            </div>
+            <input type="range" id="fontSizeSlider" min="1" max="6" step="0.1" value="2">
+        </div>
+        <div class="slider-group">
+            <div class="slider-label">
+                <span>字重：</span>
+                <span id="fontWeightValue">400</span>
+            </div>
+            <input type="range" id="fontWeightSlider" min="100" max="900" step="20" value="400">
+        </div>
+
+        <div id="display">字体展示 Font Preview</div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const cssUrlInput = document.getElementById('cssUrlInput');
+        const display = document.getElementById('display');
+        const loadBtn = document.getElementById('loadBtn');
+        let currentFontLink = null;
+
+        const fontSizeSlider = document.getElementById('fontSizeSlider');
+        const fontSizeValue = document.getElementById('fontSizeValue');
+        const fontWeightSlider = document.getElementById('fontWeightSlider');
+        const fontWeightValue = document.getElementById('fontWeightValue');
+
+        textInput.addEventListener('input', () => {
+            display.textContent = textInput.value;
+        });
+
+        fontSizeSlider.addEventListener('input', () => {
+            display.style.fontSize = fontSizeSlider.value + 'rem';
+            fontSizeValue.textContent = fontSizeSlider.value + 'rem';
+        });
+
+        fontWeightSlider.addEventListener('input', () => {
+            display.style.fontWeight = fontWeightSlider.value;
+            fontWeightValue.textContent = fontWeightSlider.value;
+        });
+
+        // 初始化
+        display.style.fontSize = fontSizeSlider.value + 'rem';
+        fontSizeValue.textContent = fontSizeSlider.value + 'rem';
+        display.style.fontWeight = fontWeightSlider.value;
+        fontWeightValue.textContent = fontWeightSlider.value;
+
+        loadBtn.addEventListener('click', async () => {
+            // 移除之前的link
+            if (currentFontLink) {
+                document.head.removeChild(currentFontLink);
+                currentFontLink = null;
+            }
+            const url = cssUrlInput.value.trim();
+            if (!url) return;
+
+            // 加载CSS
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = url;
+            document.head.appendChild(link);
+            currentFontLink = link;
+
+            // 尝试获取CSS内容并解析font-family
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('无法获取CSS文件');
+                const cssText = await res.text();
+                // 匹配font-family
+                const fontFamilyMatch = cssText.match(/font-family\s*:\s*['"]?([^;'"]+)['"]?/i);
+                if (fontFamilyMatch && fontFamilyMatch[1]) {
+                    const fontFamily = fontFamilyMatch[1].trim();
+                    display.style.fontFamily = fontFamily + ', Arial, sans-serif';
+                } else {
+                    alert('未检测到font-family，请检查CSS文件。');
+                }
+            } catch (e) {
+                alert('加载或解析CSS文件失败: ' + e.message);
+            }
+        });
+    </script>
+</body>
+<footer>
+    <p> 版权归<b>NANOFONT</b>所有 &copy; 2025
+</footer>
+</html>
